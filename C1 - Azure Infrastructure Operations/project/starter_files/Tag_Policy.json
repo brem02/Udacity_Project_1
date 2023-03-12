@@ -1,0 +1,26 @@
+{
+	"type": "Microsoft.Authorization/policyDefinitions",
+	"name": "deny-rg-without_tag",
+	"properties": {
+	  "mode": "All",
+        "displayName": "deny-rg-without_tag",
+        "description": "This policy denies ressource groups without tags",
+        "policyRule": {
+            "if": {
+      "allOf": [
+        {
+          "field": "tags",
+          "exists": "false"
+        },
+        {
+          "field": "type",
+          "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+        }
+      ]
+    },
+    "then": {
+      "effect": "deny"
+    }
+        }
+    }
+}
