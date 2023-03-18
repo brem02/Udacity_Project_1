@@ -198,7 +198,7 @@ resource "azurerm_availability_set" "main" {
 
 # Create the virtual machines
 resource "azurerm_linux_virtual_machine" "main" {
-  count                           = var.nb_vms
+  count                           = var.number_vms
   name                            = "${var.prefix}-vm-${count.index}"
   resource_group_name             = azurerm_resource_group.main.name
   location                        = azurerm_resource_group.main.location
