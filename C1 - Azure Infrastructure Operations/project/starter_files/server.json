@@ -19,7 +19,7 @@
     "managed_image_resource_group_name": "Azuredevops",
     "managed_image_name": "myPackerImage",
  
-    "location": "East US",
+    "location": "West Europe",
     "vm_size": "Standard_B1s"
   }],
   "provisioners": [{
