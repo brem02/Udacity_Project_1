@@ -55,4 +55,4 @@ $ terraform destroy  --> If you no longer need the resources destroy the infrast
 
 
 ### Output
-The following will be the output by terraform if you have executed the terraform plan and the same output will be made when using the terraform apply:
+The following will be the output by terraform if you have executed the terraform plan command and the same output will be generated when using the terraform apply command:
