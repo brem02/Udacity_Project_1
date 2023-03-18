@@ -22,7 +22,7 @@ provider "azurerm" {
 
 # get the image that was create by the packer script
 data "azurerm_image" "web" {
-  name                = "udacity-packer-image"
+  name                = "myPackerImage"
   resource_group_name = var.packer_resource_group
 }
 
