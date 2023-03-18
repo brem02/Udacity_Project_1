@@ -29,7 +29,7 @@ $ packer build server.json
 
 Prepare with Terraform:
 -----------------------
-The terraform file creates these resources listed below:
+The terraform file creates the following resources:
 resource group
 virtual network
 subnet
@@ -45,16 +45,13 @@ $ terraform init -> to prepare your directory for terraform
 
 Modify:
 The file terraform/vars.tf contains all the variables used inside the terraform/main.tf. If you want to personnalize the code, it is likely, those values you want to modify first. The vars.tf file if necessary, this contains the variables for the resource group name, prefix for most resources, number of vm's to create, and location. If number of VM's and Location are not specified they will default to 3 instances and Canada East respectively. You will need to change the packer_resource_group variable if you used a different resource group name for the packer image.
-Review the main.tf to confirm that is creating the correct resources for your needs.
+Review the main.tf to confirm that it is creating the correct resources for your project.
 
 $ terraform plan -out solution.plan  --> to show the changes terraform will be making
 
-Deploy with Terraform --> to apply those changes:
-$ terraform apply "solution.plan"
+$ terraform apply "solution.plan"  --> Deploy with Terraform and apply those changes:
 
-If you no longer need the resources run terraform destory. This will remove all the resources.
-Destroy the infrastructure with:
-$ terraform destroy
+$ terraform destroy  --> If you no longer need the resources destroy the infrastructure with this command in order to remove all the ressources
 
 
 ### Output
