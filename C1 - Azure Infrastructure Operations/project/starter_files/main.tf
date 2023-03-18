@@ -30,7 +30,6 @@ data "azurerm_image" "web" {
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}-rg"
   location = "${var.location}"
-  tags     = "${var.tag}"
 }
 
 # create a virtual network within the resource group
