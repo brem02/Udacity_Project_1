@@ -27,8 +27,8 @@ variable "password" {
   type        = string
 }
 
-variable "nb_vms" {
-  description = "The nb of VM to create."
+variable "number_vms" {
+  description = "The number of VM to create."
   default     = 3
   type        = number
 }
