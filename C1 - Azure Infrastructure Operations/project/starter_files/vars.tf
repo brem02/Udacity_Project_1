@@ -6,7 +6,7 @@ variable "packer_resource_group" {
 
 variable "prefix" {
   description = "The prefix which should be used for all resources in this example"
-  default     = "udacity-assignment"
+  default     = "udacity-project1"
   type        = string
 }
 
