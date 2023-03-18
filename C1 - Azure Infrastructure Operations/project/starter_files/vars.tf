@@ -6,7 +6,7 @@ variable "resource_group" {
 
 variable "packer_resource_group" {
   description = "Name of the resource group where the packer image is"
-  default     =  "udacity-assignment1-rg"
+  default     =  "Azuredevops"
   type        = string
 }
 
