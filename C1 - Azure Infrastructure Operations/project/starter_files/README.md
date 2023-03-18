@@ -2,13 +2,12 @@
 
 ### Introduction
 For this project, you will write a Packer template and a Terraform template to deploy a customizable, scalable web server in Azure.
-This is a project related to Udacity Azure DevOps nanodegree. It aims at deploying a policy, an image from a Packer template that will be used by Terraform.
+This is a project related to Udacity Azure DevOps nanodegree. It aims at deploying a policy and an image from a Packer template that will be used by Terraform.
+This project will deploy a set number of virtual machines (default is 3) behind a load balancer, and set up all the other resources that need to be deployed for those virtual machines such as network security groups so the VM's are only accessible through the internal network, Virtual Networks, Subnets and Virtual Nics.
 
 ### Getting Started
 1. Clone this repository
-
 2. Create your infrastructure as code
-
 3. Update this README to reflect how someone would use your code.
 
 ### Dependencies
@@ -18,33 +17,45 @@ This is a project related to Udacity Azure DevOps nanodegree. It aims at deployi
 4. Install [Terraform](https://www.terraform.io/downloads.html)
 
 ### Instructions
-Export the variable:
-Add to your .bashrc (or .zshrc) file:
-export AZ_CLIENT_ID=00000000-0000-0000-0000-000000000000
-export AZ_CLIENT_SECRET=000000000000000000000
-export AZ_TENANT_ID=00000000-0000-0000-0000-000000000000
-export AZ_SUSCRIPTION_ID=00000000-0000-0000-0000-000000000000
-
 Create a resource group:
-Either from the portal or the CLI, create a new resource group or the projet, in my case it is udacity-assignment1-rg.
+------------------------
+Either from the portal or the CLI, create a new resource group or the projet.
 
 Deploy the policy and assign it to the resource group.
 
 Deploy the Packer image:
-$ packer build packer/server.json
+-------------------------
+$ packer build server.json
 
 Prepare with Terraform:
-$ terraform init
-$ terraform plan -out solution.plan
+-----------------------
+The terraform file creates these resources listed below:
+resource group
+virtual network
+subnet
+network security group limiting access
+network interfaces
+a public ip
+load balancer
+availability set for the virtual machines
+Linux virtual machines (3 by default)
+1 managed disk per instance
 
-Deploy with Terraform:
-$ terraform apply "solution.plan"
-
-After that destroy the infrastructure with:
-$ terraform destroy
+$ terraform init -> to prepare your directory for terraform
 
 Modify:
-The file terraform/vars.tf contains all the variables used inside the terraform/main.tf. If you want to personnalize the code, it is likely those values you want to modify first.
+The file terraform/vars.tf contains all the variables used inside the terraform/main.tf. If you want to personnalize the code, it is likely, those values you want to modify first. The vars.tf file if necessary, this contains the variables for the resource group name, prefix for most resources, number of vm's to create, and location. If number of VM's and Location are not specified they will default to 3 instances and Canada East respectively. You will need to change the packer_resource_group variable if you used a different resource group name for the packer image.
+Review the main.tf to confirm that is creating the correct resources for your needs.
+
+$ terraform plan -out solution.plan  --> to show the changes terraform will be making
+
+Deploy with Terraform --> to apply those changes:
+$ terraform apply "solution.plan"
+
+If you no longer need the resources run terraform destory. This will remove all the resources.
+Destroy the infrastructure with:
+$ terraform destroy
+
 
 ### Output
-**Your words here**
+The following will be the output by terraform if you have executed the terraform plan and the same output will be made when using the terraform apply:
