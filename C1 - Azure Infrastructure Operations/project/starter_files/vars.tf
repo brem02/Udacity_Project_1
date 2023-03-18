@@ -1,6 +1,6 @@
 variable "resource_group" {
   description = "Name of the resource group, including the -rg"
-  default     = "udacity-assignment2-rg"
+  default     = "udacity-assignment-rg"
   type        = string
 }
 
