@@ -2,8 +2,8 @@
 
 ### Introduction
 For this project, you will write a Packer template and a Terraform template to deploy a customizable, scalable web server in Azure.
-This is a project related to Udacity Azure DevOps nanodegree. It aims at deploying a policy and an image from a Packer template that will be used by Terraform.
-This project will deploy a set number of virtual machines (default is 3) behind a load balancer, and set up all the other resources that need to be deployed for those virtual machines such as network security groups so the VM's are only accessible through the internal network, Virtual Networks, Subnets and Virtual Nics.
+This is a project related to Udacity Azure DevOps nanodegree. The goal is to deploy a policy and an image from a Packer template that will be used by Terraform.
+This project will also deploy a set number of virtual machines (default is 3) behind a load balancer, and sets up all other resources that need to be deployed for those virtual machines such as network security groups. The VM's are only accessible through the internal network, Virtual Networks, Subnets and Virtual Nics.
 
 ### Getting Started
 1. Clone this repository
@@ -19,7 +19,7 @@ This project will deploy a set number of virtual machines (default is 3) behind 
 ### Instructions
 Create a resource group:
 ------------------------
-Either from the portal or the CLI, create a new resource group or the projet.
+Either from the portal or the CLI, create a new resource group or the project.
 
 Deploy the policy and assign it to the resource group.
 
@@ -44,12 +44,12 @@ Linux virtual machines (3 by default)
 $ terraform init -> to prepare your directory for terraform
 
 Modify:
-The file terraform/vars.tf contains all the variables used inside the terraform/main.tf. If you want to personnalize the code, it is likely, those values you want to modify first. The vars.tf file if necessary, this contains the variables for the resource group name, prefix for most resources, number of vm's to create, and location. If number of VM's and Location are not specified they will default to 3 instances and Canada East respectively. You will need to change the packer_resource_group variable if you used a different resource group name for the packer image.
+The file terraform/vars.tf contains all the variables used inside the terraform/main.tf. If you want to personalize the code, it is likely, those values you want to modify first. The vars.tf file contains the variables for the resource group name, prefix for most resources, number of vm's to create, and location. If number of VM's and location are not specified they will be set default to 3 instances and Canada East, respectively. You will need to change the packer_resource_group variable if you used a different resource group name for the packer image.
 Review the main.tf to confirm that it is creating the correct resources for your project.
 
 $ terraform plan -out solution.plan  --> to show the changes terraform will be making
 
-$ terraform apply "solution.plan"  --> Deploy with Terraform and apply those changes:
+$ terraform apply "solution.plan"  --> Deploy with Terraform and apply these changes:
 
 $ terraform destroy  --> If you no longer need the resources destroy the infrastructure with this command in order to remove all the ressources
 
