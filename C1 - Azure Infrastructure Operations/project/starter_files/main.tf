@@ -36,8 +36,8 @@ data "azurerm_resource_group" "main" {
 resource "azurerm_virtual_network" "main" {
   name                = "${var.prefix}-network"
   address_space       = ["10.0.0.0/22"]
-  location            = azurerm_resource_group.main.location
-  resource_group_name = azurerm_resource_group.main.name
+  location            = data.azurerm_resource_group.main.location
+  resource_group_name = data.azurerm_resource_group.main.name
 
   tags = {
     project = "udacity1"
@@ -48,7 +48,7 @@ resource "azurerm_virtual_network" "main" {
 # Create the subnet within virtual network
 resource "azurerm_subnet" "internal" {
   name                 = "internal"
-  resource_group_name  = azurerm_resource_group.main.name
+  resource_group_name  = data.azurerm_resource_group.main.name
   virtual_network_name = azurerm_virtual_network.main.name
   address_prefixes     = ["10.0.2.0/24"]
 }
@@ -56,8 +56,8 @@ resource "azurerm_subnet" "internal" {
 # Create the network security group
 resource "azurerm_network_security_group" "main" {
   name                = "main"
-  location            = azurerm_resource_group.main.location
-  resource_group_name = azurerm_resource_group.main.name
+  location            = data.azurerm_resource_group.main.location
+  resource_group_name = data.azurerm_resource_group.main.name
 
   tags = {
     project = "udacity1"
@@ -77,7 +77,7 @@ resource "azurerm_network_security_rule" "rule1" {
     destination_port_range       = "*"
     source_address_prefix        = "*"
     destination_address_prefix   = "*"
-    resource_group_name          = azurerm_resource_group.main.name
+    resource_group_name          = data.azurerm_resource_group.main.name
     network_security_group_name  = azurerm_network_security_group.main.name
 }
 
@@ -92,7 +92,7 @@ resource "azurerm_network_security_rule" "rule2" {
     destination_port_ranges      = azurerm_virtual_network.main.address_space
     source_address_prefix        = "VirtualNetwork"
     destination_address_prefix   = "VirtualNetwork"
-    resource_group_name          = azurerm_resource_group.main.name
+    resource_group_name          = data.azurerm_resource_group.main.name
     network_security_group_name  = azurerm_network_security_group.main.name
 }
 
@@ -107,7 +107,7 @@ resource "azurerm_network_security_rule" "rule3" {
     destination_port_ranges      = azurerm_virtual_network.main.address_space
     source_address_prefix        = "VirtualNetwork"
     destination_address_prefix   = "VirtualNetwork"
-    resource_group_name          = azurerm_resource_group.main.name
+    resource_group_name          = data.azurerm_resource_group.main.name
     network_security_group_name  = azurerm_network_security_group.main.name
 }
 
@@ -122,15 +122,15 @@ resource "azurerm_network_security_rule" "rule4" {
     destination_port_ranges      = azurerm_virtual_network.main.address_space
     source_address_prefix        = "AzureLoadBalancer"
     destination_address_prefix   = "VirtualNetwork"
-    resource_group_name          = azurerm_resource_group.main.name
+    resource_group_name          = data.azurerm_resource_group.main.name
     network_security_group_name  = azurerm_network_security_group.main.name
 }
 
 # Create network interface
 resource "azurerm_network_interface" "main" {
   name                = "${var.prefix}-nic"
-  resource_group_name = azurerm_resource_group.main.name
-  location            = azurerm_resource_group.main.location
+  resource_group_name = data.azurerm_resource_group.main.name
+  location            = data.azurerm_resource_group.main.location
 
   ip_configuration {
     name                          = "internal"
@@ -147,8 +147,8 @@ resource "azurerm_network_interface" "main" {
 # Create public IP
 resource "azurerm_public_ip" "main" {
   name                = "${var.prefix}-public-ip"
-  resource_group_name = azurerm_resource_group.main.name
-  location            = azurerm_resource_group.main.location
+  resource_group_name = data.azurerm_resource_group.main.name
+  location            = data.azurerm_resource_group.main.location
   allocation_method   = "Static"
 
   tags = {
@@ -160,8 +160,8 @@ resource "azurerm_public_ip" "main" {
 # Create load balancer
 resource "azurerm_lb" "main" {
   name                = "${var.prefix}-lb"
-  location            = azurerm_resource_group.main.location
-  resource_group_name = azurerm_resource_group.main.name
+  location            = data.azurerm_resource_group.main.location
+  resource_group_name = data.azurerm_resource_group.main.name
 
   frontend_ip_configuration {
     name                 = "PublicIPAddress"
@@ -171,7 +171,7 @@ resource "azurerm_lb" "main" {
 
 # The load balancer will use this backend pool
 resource "azurerm_lb_backend_address_pool" "main" {
-  #resource_group_name = azurerm_resource_group.main.name
+  #resource_group_name = data.azurerm_resource_group.main.name
   loadbalancer_id     = azurerm_lb.main.id
   name                = "${var.prefix}-lb-backend-address-pool"
 }
@@ -186,8 +186,8 @@ resource "azurerm_network_interface_backend_address_pool_association" "main" {
 # Create virtual machine availability set
 resource "azurerm_availability_set" "main" {
   name                = "${var.prefix}-aset"
-  location            = azurerm_resource_group.main.location
-  resource_group_name = azurerm_resource_group.main.name
+  location            = data.azurerm_resource_group.main.location
+  resource_group_name = data.azurerm_resource_group.main.name
 
   tags = {
     project = "udacity1"
