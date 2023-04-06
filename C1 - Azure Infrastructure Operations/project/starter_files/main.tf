@@ -27,7 +27,7 @@ data "azurerm_image" "web" {
 }
 
 # Create the resource group
-resource "azurerm_resource_group" "main" {
+data "azurerm_resource_group" "main" {
   name     = "Azuredevops"
   location = "${var.location}"
 }
