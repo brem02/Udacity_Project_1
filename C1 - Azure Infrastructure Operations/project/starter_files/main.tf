@@ -199,8 +199,8 @@ resource "azurerm_availability_set" "main" {
 resource "azurerm_linux_virtual_machine" "main" {
   count                           = var.number_vms
   name                            = "${var.prefix}-vm-${count.index}"
-  resource_group_name             = azurerm_resource_group.main.name
-  location                        = azurerm_resource_group.main.location
+  resource_group_name             = data.azurerm_resource_group.main.name
+  location                        = data.azurerm_resource_group.main.location
   size                            = "Standard_B1ls"
   admin_username                  = "${var.username}"
   admin_password                  = "${var.password}"
