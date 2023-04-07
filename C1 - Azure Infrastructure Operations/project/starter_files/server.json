@@ -1,15 +1,15 @@
 {
   "variables": {
-    "client_id": "c4b2b42c-54f5-46b1-a07d-821ced880dda",
-    "client_secret": "aFn8Q~aksvJMjq5v3xXcTMXMjWr5Xg.1xPhRxdum",
-    "subscription_id": "e7a256dc-769a-421c-9f8e-e283ed3cbefa"
+    "client_id": "28df844e-6041-4490-873f-60bf8d33922e",
+    "client_secret": "upl8Q~CqVODo6e2spD0-Lle0VdYqTf3bz1oY3b99",
+    "subscription_id": "de282839-e67a-4cbe-a2a6-de7145c67f52"
   },
   "builders": [{
     "type": "azure-arm",
  
-    "client_id": "c4b2b42c-54f5-46b1-a07d-821ced880dda",
-    "client_secret": "aFn8Q~aksvJMjq5v3xXcTMXMjWr5Xg.1xPhRxdum",
-    "subscription_id": "e7a256dc-769a-421c-9f8e-e283ed3cbefa",
+    "client_id": "28df844e-6041-4490-873f-60bf8d33922e",
+    "client_secret": "upl8Q~CqVODo6e2spD0-Lle0VdYqTf3bz1oY3b99",
+    "subscription_id": "de282839-e67a-4cbe-a2a6-de7145c67f52",
  
     "os_type": "Linux",
     "image_publisher": "Canonical",
