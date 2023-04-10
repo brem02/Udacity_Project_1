@@ -90,8 +90,8 @@ resource "azurerm_network_security_rule" "rule2" {
     direction                    = "Inbound"
     access                       = "Allow"
     protocol                     = "*"
-    source_port_ranges           =  "*"
-    destination_port_ranges      =  "*"
+    source_port_ranges           = "*"
+    destination_port_ranges      = "*"
     source_address_prefix        = "VirtualNetwork"
     destination_address_prefix   = "VirtualNetwork"
     resource_group_name          = data.azurerm_resource_group.main.name
@@ -105,8 +105,8 @@ resource "azurerm_network_security_rule" "rule3" {
     direction                    = "Outbound"
     access                       = "Allow"
     protocol                     = "*"
-    source_port_ranges           =  "*"
-    destination_port_ranges      =  "*"
+    source_port_ranges           = "*"
+    destination_port_ranges      = "*"
     source_address_prefix        = "VirtualNetwork"
     destination_address_prefix   = "VirtualNetwork"
     resource_group_name          = data.azurerm_resource_group.main.name
@@ -120,8 +120,8 @@ resource "azurerm_network_security_rule" "rule4" {
     direction                    = "Inbound"
     access                       = "Allow"
     protocol                     = "Tcp"
-    source_port_ranges           =  "*"
-    destination_port_ranges      =  "*"
+    source_port_ranges           = "*"
+    destination_port_ranges      = "*"
     source_address_prefix        = "AzureLoadBalancer"
     destination_address_prefix   = "VirtualNetwork"
     resource_group_name          = data.azurerm_resource_group.main.name
