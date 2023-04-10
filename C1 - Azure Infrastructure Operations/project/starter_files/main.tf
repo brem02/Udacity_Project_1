@@ -89,7 +89,7 @@ resource "azurerm_network_security_rule" "rule2" {
     access                       = "Allow"
     protocol                     = "*"
     source_port_ranges           = "*"
-    destination_port_ranges      = "*"
+    destination_port_ranges      = ["30315-30317"]
     source_address_prefix        = "VirtualNetwork"
     destination_address_prefix   = "VirtualNetwork"
     resource_group_name          = data.azurerm_resource_group.main.name
@@ -104,7 +104,7 @@ resource "azurerm_network_security_rule" "rule3" {
     access                       = "Allow"
     protocol                     = "*"
     source_port_ranges           = "*"
-    destination_port_ranges      = "*"
+    destination_port_ranges      = ["30315-30317"]
     source_address_prefix        = "VirtualNetwork"
     destination_address_prefix   = "VirtualNetwork"
     resource_group_name          = data.azurerm_resource_group.main.name
@@ -119,7 +119,7 @@ resource "azurerm_network_security_rule" "rule4" {
     access                       = "Allow"
     protocol                     = "Tcp"
     source_port_ranges           = "*"
-    destination_port_ranges      = "*"
+    destination_port_ranges      = ["30315-30317"]
     source_address_prefix        = "AzureLoadBalancer"
     destination_address_prefix   = "VirtualNetwork"
     resource_group_name          = data.azurerm_resource_group.main.name
