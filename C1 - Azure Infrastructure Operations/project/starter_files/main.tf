@@ -126,6 +126,7 @@ resource "azurerm_network_security_rule" "rule4" {
     network_security_group_name  = azurerm_network_security_group.main.name
 }
 
+# Loop bauen, da wir drei Blöcke brauchen für 3 virtual machines
 # Create network interface
 resource "azurerm_network_interface" "main" {
   name                = "${var.prefix}-nic"
