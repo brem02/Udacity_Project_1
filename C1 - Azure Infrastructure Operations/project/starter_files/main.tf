@@ -129,10 +129,11 @@ resource "azurerm_network_security_rule" "rule4" {
 # Loop bauen, da wir drei Blöcke brauchen für 3 virtual machines
 # Create network interface
 resource "azurerm_network_interface" "main" {
-  name                = "${var.prefix}-nic"
+  count               = var.num_of_vms
+  name                = "${var.prefix}-${count.index}-nic"
   resource_group_name = data.azurerm_resource_group.main.name
   location            = data.azurerm_resource_group.main.location
-
+  
   ip_configuration {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.internal.id
