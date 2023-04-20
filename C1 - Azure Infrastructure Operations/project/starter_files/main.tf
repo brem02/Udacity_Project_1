@@ -20,7 +20,7 @@ provider "azurerm" {
   features {}
 }
 
-# get the image that was create by the packer script
+# get the image that was created by the packer script
 data "azurerm_image" "web" {
   name                = "myPackerImage"
   resource_group_name = var.packer_resource_group
