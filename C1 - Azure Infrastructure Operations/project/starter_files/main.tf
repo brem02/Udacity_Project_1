@@ -126,10 +126,9 @@ resource "azurerm_network_security_rule" "rule4" {
     network_security_group_name  = azurerm_network_security_group.main.name
 }
 
-# Loop bauen, da wir drei Blöcke brauchen für 3 virtual machines
-# Create network interface
+# Create network interfaces
 resource "azurerm_network_interface" "main" {
-  count               = var.num_of_vms
+  count               = var.number_vms
   name                = "${var.prefix}-${count.index}-nic"
   resource_group_name = data.azurerm_resource_group.main.name
   location            = data.azurerm_resource_group.main.location
@@ -180,7 +179,8 @@ resource "azurerm_lb_backend_address_pool" "main" {
 
 # Associate the LB with the backend address pool
 resource "azurerm_network_interface_backend_address_pool_association" "main" {
-  network_interface_id    = azurerm_network_interface.main.id
+  count                   = var.number_vms
+  network_interface_id    = azurerm_network_interface.main[count.index].id
   ip_configuration_name   = "internal"
   backend_address_pool_id = azurerm_lb_backend_address_pool.main.id
 }
@@ -225,3 +225,21 @@ resource "azurerm_linux_virtual_machine" "main" {
   }
 }
 
+#create a virtual disk for each VM created.
+resource "azurerm_managed_disk" "main" {
+  count                           = var.number_vms
+  name                            = "data-disk-${count.index}"
+  location                        = data.azurerm_resource_group.main.location
+  resource_group_name             = data.azurerm_resource_group.main.name
+  storage_account_type            = "Standard_LRS"
+  #create_option                   = "Empty"
+  #disk_size_gb                    = 1
+}
+
+resource "azurerm_virtual_machine_data_disk_attachment" "main" {
+  count              = var.number_vms
+  managed_disk_id    = azurerm_managed_disk.main.*.id[count.index]
+  virtual_machine_id = azurerm_linux_virtual_machine.main.*.id[count.index]
+  lun                = 10 * count.index
+  caching            = "ReadWrite"
+}
