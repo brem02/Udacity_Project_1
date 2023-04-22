@@ -30,15 +30,15 @@ $ packer build server.json
 Prepare with Terraform:
 -----------------------
 The terraform file creates the following resources:
-resource group
-virtual network
-subnet
-network security group limiting access
-network interfaces
-a public ip
-load balancer
-availability set for the virtual machines
-Linux virtual machines (3 by default)
+resource group,
+virtual network,
+subnet,
+network security group limiting access,
+network interfaces,
+a public ip,
+load balancer,
+availability set for the virtual machines,
+Linux virtual machines (3 by default),
 1 managed disk per instance
 
 $ terraform init -> to prepare your directory for terraform
@@ -71,7 +71,7 @@ Terraform will perform the following actions:
       + name                         = "udacity-project1-aset"
       + platform_fault_domain_count  = 3
       + platform_update_domain_count = 5
-      + resource_group_name          = "udacity-project1-rg"
+      + resource_group_name          = "Azuredevops"
       + tags                         = {
           + "environment" = "development"
           + "project"     = "udacity1"
@@ -85,7 +85,7 @@ Terraform will perform the following actions:
       + name                 = "udacity-project1-lb"
       + private_ip_address   = (known after apply)
       + private_ip_addresses = (known after apply)
-      + resource_group_name  = "udacity-project1-rg"
+      + resource_group_name  = "Azuredevops"
       + sku                  = "Basic"
       + sku_tier             = "Regional"
 
@@ -137,9 +137,9 @@ Terraform will perform the following actions:
       + provision_vm_agent              = true
       + public_ip_address               = (known after apply)
       + public_ip_addresses             = (known after apply)
-      + resource_group_name             = "udacity-project1-rg"
-      + size                            = "Standard_B1ls"
-      + source_image_id                 = "/subscriptions/e7a256dc-769a-421c-9f8e-e283ed3cbefa/resourceGroups/Azuredevops/providers/Microsoft.Compute/images/myPackerImage"
+      + resource_group_name             = "Azuredevops"
+      + size                            = "Standard_B1s"
+      + source_image_id                 = "/subscriptions/99c360d5-5a1d-45b7-93ae-80a16feaccb7/resourceGroups/Azuredevops/providers/Microsoft.Compute/images/myPackerImage"
       + tags                            = {
           + "environment" = "development"
           + "project"     = "udacity1"
@@ -148,7 +148,7 @@ Terraform will perform the following actions:
 
       + os_disk {
           + caching                   = "ReadWrite"
-          + disk_size_gb              = 1
+          + disk_size_gb              = (known after apply)
           + name                      = (known after apply)
           + storage_account_type      = "Standard_LRS"
           + write_accelerator_enabled = false
@@ -182,9 +182,9 @@ Terraform will perform the following actions:
       + provision_vm_agent              = true
       + public_ip_address               = (known after apply)
       + public_ip_addresses             = (known after apply)
-      + resource_group_name             = "udacity-project1-rg"
-      + size                            = "Standard_B1ls"
-      + source_image_id                 = "/subscriptions/e7a256dc-769a-421c-9f8e-e283ed3cbefa/resourceGroups/Azuredevops/providers/Microsoft.Compute/images/myPackerImage"
+      + resource_group_name             = "Azuredevops"
+      + size                            = "Standard_B1s"
+      + source_image_id                 = "/subscriptions/99c360d5-5a1d-45b7-93ae-80a16feaccb7/resourceGroups/Azuredevops/providers/Microsoft.Compute/images/myPackerImage"
       + tags                            = {
           + "environment" = "development"
           + "project"     = "udacity1"
@@ -193,7 +193,7 @@ Terraform will perform the following actions:
 
       + os_disk {
           + caching                   = "ReadWrite"
-          + disk_size_gb              = 1
+          + disk_size_gb              = (known after apply)
           + name                      = (known after apply)
           + storage_account_type      = "Standard_LRS"
           + write_accelerator_enabled = false
@@ -221,15 +221,15 @@ Terraform will perform the following actions:
       + network_interface_ids           = (known after apply)
       + patch_mode                      = "ImageDefault"
       + platform_fault_domain           = -1
-     + priority                        = "Regular"
+      + priority                        = "Regular"
       + private_ip_address              = (known after apply)
       + private_ip_addresses            = (known after apply)
       + provision_vm_agent              = true
       + public_ip_address               = (known after apply)
       + public_ip_addresses             = (known after apply)
-      + resource_group_name             = "udacity-project1-rg"
-      + size                            = "Standard_B1ls"
-      + source_image_id                 = "/subscriptions/e7a256dc-769a-421c-9f8e-e283ed3cbefa/resourceGroups/Azuredevops/providers/Microsoft.Compute/images/myPackerImage"
+      + resource_group_name             = "Azuredevops"
+      + size                            = "Standard_B1s"
+      + source_image_id                 = "/subscriptions/99c360d5-5a1d-45b7-93ae-80a16feaccb7/resourceGroups/Azuredevops/providers/Microsoft.Compute/images/myPackerImage"
       + tags                            = {
           + "environment" = "development"
           + "project"     = "udacity1"
@@ -238,7 +238,7 @@ Terraform will perform the following actions:
 
       + os_disk {
           + caching                   = "ReadWrite"
-          + disk_size_gb              = 1
+          + disk_size_gb              = (known after apply)
           + name                      = (known after apply)
           + storage_account_type      = "Standard_LRS"
           + write_accelerator_enabled = false
@@ -250,7 +250,67 @@ Terraform will perform the following actions:
         }
     }
 
-  # azurerm_network_interface.main will be created
+  # azurerm_managed_disk.main[0] will be created
+  + resource "azurerm_managed_disk" "main" {
+      + create_option                 = "Empty"
+      + disk_iops_read_only           = (known after apply)
+      + disk_iops_read_write          = (known after apply)
+      + disk_mbps_read_only           = (known after apply)
+      + disk_mbps_read_write          = (known after apply)
+      + disk_size_gb                  = 1
+      + id                            = (known after apply)
+      + location                      = "westeurope"
+      + logical_sector_size           = (known after apply)
+      + max_shares                    = (known after apply)
+      + name                          = "data-disk-0"
+      + public_network_access_enabled = true
+      + resource_group_name           = "Azuredevops"
+      + source_uri                    = (known after apply)
+      + storage_account_type          = "Standard_LRS"
+      + tier                          = (known after apply)
+    }
+
+  # azurerm_managed_disk.main[1] will be created
+  + resource "azurerm_managed_disk" "main" {
+      + create_option                 = "Empty"
+      + disk_iops_read_only           = (known after apply)
+      + disk_iops_read_write          = (known after apply)
+      + disk_mbps_read_only           = (known after apply)
+      + disk_mbps_read_write          = (known after apply)
+      + disk_size_gb                  = 1
+      + id                            = (known after apply)
+      + location                      = "westeurope"
+      + logical_sector_size           = (known after apply)
+      + max_shares                    = (known after apply)
+      + name                          = "data-disk-1"
+      + public_network_access_enabled = true
+      + resource_group_name           = "Azuredevops"
+      + source_uri                    = (known after apply)
+      + storage_account_type          = "Standard_LRS"
+      + tier                          = (known after apply)
+    }
+
+  # azurerm_managed_disk.main[2] will be created
+  + resource "azurerm_managed_disk" "main" {
+      + create_option                 = "Empty"
+      + disk_iops_read_only           = (known after apply)
+      + disk_iops_read_write          = (known after apply)
+      + disk_mbps_read_only           = (known after apply)
+      + disk_mbps_read_write          = (known after apply)
+      + disk_size_gb                  = 1
+      + id                            = (known after apply)
+      + location                      = "westeurope"
+      + logical_sector_size           = (known after apply)
+      + max_shares                    = (known after apply)
+      + name                          = "data-disk-2"
+      + public_network_access_enabled = true
+      + resource_group_name           = "Azuredevops"
+      + source_uri                    = (known after apply)
+      + storage_account_type          = "Standard_LRS"
+      + tier                          = (known after apply)
+    }
+
+  # azurerm_network_interface.main[0] will be created
   + resource "azurerm_network_interface" "main" {
       + applied_dns_servers           = (known after apply)
       + dns_servers                   = (known after apply)
@@ -261,10 +321,10 @@ Terraform will perform the following actions:
       + internal_domain_name_suffix   = (known after apply)
       + location                      = "westeurope"
       + mac_address                   = (known after apply)
-      + name                          = "udacity-project1-nic"
+      + name                          = "udacity-project1-0-nic"
       + private_ip_address            = (known after apply)
       + private_ip_addresses          = (known after apply)
-      + resource_group_name           = "udacity-project1-rg"
+      + resource_group_name           = "Azuredevops"
       + tags                          = {
           + "environment" = "development"
           + "project"     = "udacity1"
@@ -282,7 +342,87 @@ Terraform will perform the following actions:
         }
     }
 
-  # azurerm_network_interface_backend_address_pool_association.main will be created
+  # azurerm_network_interface.main[1] will be created
+  + resource "azurerm_network_interface" "main" {
+      + applied_dns_servers           = (known after apply)
+      + dns_servers                   = (known after apply)
+      + enable_accelerated_networking = false
+      + enable_ip_forwarding          = false
+      + id                            = (known after apply)
+      + internal_dns_name_label       = (known after apply)
+      + internal_domain_name_suffix   = (known after apply)
+      + location                      = "westeurope"
+      + mac_address                   = (known after apply)
+      + name                          = "udacity-project1-1-nic"
+      + private_ip_address            = (known after apply)
+      + private_ip_addresses          = (known after apply)
+      + resource_group_name           = "Azuredevops"
+      + tags                          = {
+          + "environment" = "development"
+          + "project"     = "udacity1"
+        }
+      + virtual_machine_id            = (known after apply)
+
+      + ip_configuration {
+          + gateway_load_balancer_frontend_ip_configuration_id = (known after apply)
+          + name                                               = "internal"
+          + primary                                            = (known after apply)
+          + private_ip_address                                 = (known after apply)
+          + private_ip_address_allocation                      = "Dynamic"
+          + private_ip_address_version                         = "IPv4"
+          + subnet_id                                          = (known after apply)
+        }
+    }
+
+  # azurerm_network_interface.main[2] will be created
+  + resource "azurerm_network_interface" "main" {
+      + applied_dns_servers           = (known after apply)
+      + dns_servers                   = (known after apply)
+      + enable_accelerated_networking = false
+      + enable_ip_forwarding          = false
+      + id                            = (known after apply)
+      + internal_dns_name_label       = (known after apply)
+      + internal_domain_name_suffix   = (known after apply)
+      + location                      = "westeurope"
+      + mac_address                   = (known after apply)
+      + name                          = "udacity-project1-2-nic"
+      + private_ip_address            = (known after apply)
+      + private_ip_addresses          = (known after apply)
+      + resource_group_name           = "Azuredevops"
+      + tags                          = {
+          + "environment" = "development"
+          + "project"     = "udacity1"
+        }
+      + virtual_machine_id            = (known after apply)
+
+      + ip_configuration {
+          + gateway_load_balancer_frontend_ip_configuration_id = (known after apply)
+          + name                                               = "internal"
+          + primary                                            = (known after apply)
+          + private_ip_address                                 = (known after apply)
+          + private_ip_address_allocation                      = "Dynamic"
+          + private_ip_address_version                         = "IPv4"
+          + subnet_id                                          = (known after apply)
+        }
+    }
+
+  # azurerm_network_interface_backend_address_pool_association.main[0] will be created
+  + resource "azurerm_network_interface_backend_address_pool_association" "main" {
+      + backend_address_pool_id = (known after apply)
+      + id                      = (known after apply)
+      + ip_configuration_name   = "internal"
+      + network_interface_id    = (known after apply)
+    }
+
+  # azurerm_network_interface_backend_address_pool_association.main[1] will be created
+  + resource "azurerm_network_interface_backend_address_pool_association" "main" {
+      + backend_address_pool_id = (known after apply)
+      + id                      = (known after apply)
+      + ip_configuration_name   = "internal"
+      + network_interface_id    = (known after apply)
+    }
+
+  # azurerm_network_interface_backend_address_pool_association.main[2] will be created
   + resource "azurerm_network_interface_backend_address_pool_association" "main" {
       + backend_address_pool_id = (known after apply)
       + id                      = (known after apply)
@@ -295,7 +435,7 @@ Terraform will perform the following actions:
       + id                  = (known after apply)
       + location            = "westeurope"
       + name                = "main"
-      + resource_group_name = "udacity-project1-rg"
+      + resource_group_name = "Azuredevops"
       + security_rule       = (known after apply)
       + tags                = {
           + "environment" = "development"
@@ -303,7 +443,7 @@ Terraform will perform the following actions:
         }
     }
 
- # azurerm_network_security_rule.rule1 will be created
+  # azurerm_network_security_rule.rule1 will be created
   + resource "azurerm_network_security_rule" "rule1" {
       + access                      = "Deny"
       + description                 = "This rule with low priority denies all the inbound traffic."
@@ -315,7 +455,7 @@ Terraform will perform the following actions:
       + network_security_group_name = "main"
       + priority                    = 100
       + protocol                    = "*"
-      + resource_group_name         = "udacity-project1-rg"
+      + resource_group_name         = "Azuredevops"
       + source_address_prefix       = "*"
       + source_port_range           = "*"
     }
@@ -326,7 +466,7 @@ Terraform will perform the following actions:
       + description                 = "This rule allows the inbound traffic inside the same virtual network."
       + destination_address_prefix  = "VirtualNetwork"
       + destination_port_ranges     = [
-          + "10.0.0.0/22",
+          + "30315-30317",
         ]
       + direction                   = "Inbound"
       + id                          = (known after apply)
@@ -334,10 +474,10 @@ Terraform will perform the following actions:
       + network_security_group_name = "main"
       + priority                    = 101
       + protocol                    = "*"
-      + resource_group_name         = "udacity-project1-rg"
+      + resource_group_name         = "Azuredevops"
       + source_address_prefix       = "VirtualNetwork"
       + source_port_ranges          = [
-          + "10.0.0.0/22",
+          + "30315-30317",
         ]
     }
 
@@ -347,7 +487,7 @@ Terraform will perform the following actions:
       + description                 = "This rule allows the outbound traffic inside the same virtual network."
       + destination_address_prefix  = "VirtualNetwork"
       + destination_port_ranges     = [
-          + "10.0.0.0/22",
+          + "30315-30317",
         ]
       + direction                   = "Outbound"
       + id                          = (known after apply)
@@ -355,10 +495,10 @@ Terraform will perform the following actions:
       + network_security_group_name = "main"
       + priority                    = 102
       + protocol                    = "*"
-      + resource_group_name         = "udacity-project1-rg"
+      + resource_group_name         = "Azuredevops"
       + source_address_prefix       = "VirtualNetwork"
       + source_port_ranges          = [
-          + "10.0.0.0/22",
+          + "30315-30317",
         ]
     }
 
@@ -368,7 +508,7 @@ Terraform will perform the following actions:
       + description                 = "This rule allows the HTTP traffic from the load balancer."
       + destination_address_prefix  = "VirtualNetwork"
       + destination_port_ranges     = [
-          + "10.0.0.0/22",
+          + "30315-30317",
         ]
       + direction                   = "Inbound"
       + id                          = (known after apply)
@@ -376,10 +516,10 @@ Terraform will perform the following actions:
       + network_security_group_name = "main"
       + priority                    = 103
       + protocol                    = "Tcp"
-      + resource_group_name         = "udacity-project1-rg"
+      + resource_group_name         = "Azuredevops"
       + source_address_prefix       = "AzureLoadBalancer"
       + source_port_ranges          = [
-          + "10.0.0.0/22",
+          + "30315-30317",
         ]
     }
 
@@ -393,7 +533,7 @@ Terraform will perform the following actions:
       + ip_version              = "IPv4"
       + location                = "westeurope"
       + name                    = "udacity-project1-public-ip"
-      + resource_group_name     = "udacity-project1-rg"
+      + resource_group_name     = "Azuredevops"
       + sku                     = "Basic"
       + sku_tier                = "Regional"
       + tags                    = {
@@ -402,37 +542,63 @@ Terraform will perform the following actions:
         }
     }
 
-  # azurerm_resource_group.main will be created
-  + resource "azurerm_resource_group" "main" {
-      + id       = (known after apply)
-      + location = "westeurope"
-      + name     = "udacity-project1-rg"
-    }
-
   # azurerm_subnet.internal will be created
   + resource "azurerm_subnet" "internal" {
       + address_prefixes                               = [
-          + "10.0.2.0/24",
+          + "10.0.0.0/28",
         ]
       + enforce_private_link_endpoint_network_policies = false
       + enforce_private_link_service_network_policies  = false
       + id                                             = (known after apply)
       + name                                           = "internal"
-      + resource_group_name                            = "udacity-project1-rg"
+      + resource_group_name                            = "Azuredevops"
       + virtual_network_name                           = "udacity-project1-network"
+    }
+
+  # azurerm_virtual_machine_data_disk_attachment.main[0] will be created
+  + resource "azurerm_virtual_machine_data_disk_attachment" "main" {
+      + caching                   = "ReadWrite"
+      + create_option             = "Attach"
+      + id                        = (known after apply)
+      + lun                       = 0
+      + managed_disk_id           = (known after apply)
+      + virtual_machine_id        = (known after apply)
+      + write_accelerator_enabled = false
+    }
+
+  # azurerm_virtual_machine_data_disk_attachment.main[1] will be created
+  + resource "azurerm_virtual_machine_data_disk_attachment" "main" {
+      + caching                   = "ReadWrite"
+      + create_option             = "Attach"
+      + id                        = (known after apply)
+      + lun                       = 10
+      + managed_disk_id           = (known after apply)
+      + virtual_machine_id        = (known after apply)
+      + write_accelerator_enabled = false
+    }
+
+  # azurerm_virtual_machine_data_disk_attachment.main[2] will be created
+  + resource "azurerm_virtual_machine_data_disk_attachment" "main" {
+      + caching                   = "ReadWrite"
+      + create_option             = "Attach"
+      + id                        = (known after apply)
+      + lun                       = 20
+      + managed_disk_id           = (known after apply)
+      + virtual_machine_id        = (known after apply)
+      + write_accelerator_enabled = false
     }
 
   # azurerm_virtual_network.main will be created
   + resource "azurerm_virtual_network" "main" {
       + address_space       = [
-          + "10.0.0.0/22",
+          + "10.0.0.0/24",
         ]
       + dns_servers         = (known after apply)
       + guid                = (known after apply)
       + id                  = (known after apply)
       + location            = "westeurope"
       + name                = "udacity-project1-network"
-      + resource_group_name = "udacity-project1-rg"
+      + resource_group_name = "Azuredevops"
       + subnet              = (known after apply)
       + tags                = {
           + "environment" = "development"
@@ -440,5 +606,4 @@ Terraform will perform the following actions:
         }
     }
 
-Plan: 17 to add, 0 to change, 0 to destroy.
-
+Plan: 26 to add, 0 to change, 0 to destroy.
