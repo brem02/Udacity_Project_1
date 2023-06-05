@@ -36,7 +36,8 @@ data "azurerm_resource_group" "main" {
 resource "azurerm_virtual_network" "main" {
   name                = "${var.prefix}-network"
   address_space       = ["10.0.0.0/24"]
-  location            = data.azurerm_resource_group.main.location
+  #location            = data.azurerm_resource_group.main.location
+  location            = var.location
   resource_group_name = data.azurerm_resource_group.main.name
 
   tags = {
@@ -56,7 +57,8 @@ resource "azurerm_subnet" "internal" {
 # Create the network security group
 resource "azurerm_network_security_group" "main" {
   name                = "main"
-  location            = data.azurerm_resource_group.main.location
+  #location            = data.azurerm_resource_group.main.location
+  location            = var.location
   resource_group_name = data.azurerm_resource_group.main.name
 
   tags = {
@@ -131,7 +133,8 @@ resource "azurerm_network_interface" "main" {
   count               = var.number_vms
   name                = "${var.prefix}-${count.index}-nic"
   resource_group_name = data.azurerm_resource_group.main.name
-  location            = data.azurerm_resource_group.main.location
+  #location            = data.azurerm_resource_group.main.location
+  location                        = var.location
   
   ip_configuration {
     name                          = "internal"
@@ -149,7 +152,8 @@ resource "azurerm_network_interface" "main" {
 resource "azurerm_public_ip" "main" {
   name                = "${var.prefix}-public-ip"
   resource_group_name = data.azurerm_resource_group.main.name
-  location            = data.azurerm_resource_group.main.location
+  #location            = data.azurerm_resource_group.main.location
+  location                        = var.location
   allocation_method   = "Static"
 
   tags = {
@@ -161,7 +165,8 @@ resource "azurerm_public_ip" "main" {
 # Create load balancer
 resource "azurerm_lb" "main" {
   name                = "${var.prefix}-lb"
-  location            = data.azurerm_resource_group.main.location
+  #location            = data.azurerm_resource_group.main.location
+  location                        = var.location
   resource_group_name = data.azurerm_resource_group.main.name
 
   frontend_ip_configuration {
@@ -188,7 +193,8 @@ resource "azurerm_network_interface_backend_address_pool_association" "main" {
 # Create virtual machine availability set
 resource "azurerm_availability_set" "main" {
   name                = "${var.prefix}-aset"
-  location            = data.azurerm_resource_group.main.location
+  #location            = data.azurerm_resource_group.main.location
+  location                        = var.location
   resource_group_name = data.azurerm_resource_group.main.name
 
   tags = {
@@ -230,7 +236,8 @@ resource "azurerm_linux_virtual_machine" "main" {
 resource "azurerm_managed_disk" "main" {
   count                           = var.number_vms
   name                            = "data-disk-${count.index}"
-  location                        = data.azurerm_resource_group.main.location
+  #location                        = data.azurerm_resource_group.main.location
+  location                        = var.location
   resource_group_name             = data.azurerm_resource_group.main.name
   storage_account_type            = "Standard_LRS"
   create_option                   = "Empty"
