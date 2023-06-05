@@ -29,7 +29,7 @@ data "azurerm_image" "web" {
 # Create the resource group
 data "azurerm_resource_group" "main" {
   name     = "Azuredevops"
-  location = var.location
+  #location = var.location
 }
 
 # create a virtual network within the resource group
