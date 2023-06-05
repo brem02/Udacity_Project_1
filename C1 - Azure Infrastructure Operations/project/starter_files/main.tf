@@ -202,7 +202,8 @@ resource "azurerm_linux_virtual_machine" "main" {
   count                           = var.number_vms
   name                            = "${var.prefix}-vm-${count.index}"
   resource_group_name             = data.azurerm_resource_group.main.name
-  location                        = data.azurerm_resource_group.main.location
+  #location                        = data.azurerm_resource_group.main.location
+  location                        = var.location
   size                            = "Standard_B1s"
   admin_username                  = "${var.username}"
   admin_password                  = "${var.password}"
